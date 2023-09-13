@@ -2,7 +2,30 @@
 
 ## Installation
 
-    
+you may create a new Laravel project via the Composer create-project command:
+
+```
+    composer create-project jeremieflahaut/laravel-api-starter-kit <project name>
+```
+
+if you are on Docker you can use official [Composer](https://hub.docker.com/_/composer) Image : 
+
+```
+    docker run --rm --interactive --tty --volume $PWD:/app --user $(id -u):$(id -g) \ 
+        composer create-project jeremieflahaut/laravel-api-starter-kit <project name>
+```
+
+migrations to database (by default it's sqlite see your `.env`)
+
+```
+    cd <project name> && php artisan migrate
+```
+
+Start Laravel's local development server using the Laravel's Artisan CLI serve command:
+
+```
+    php artisan serve
+```
 
 ## Features
 
