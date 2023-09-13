@@ -61,10 +61,10 @@ We force https on with the url generator in `boot()` method of `app/Providers/Ap
 
 ### laravel pint
 We added a git pre hook before each commit to run laravel pint on the php files that will be in the commit. 
-For this I execute this command : 
+For this we execute this command in `post-autoload-dump` composer script: 
 
 ```bash
-    git config core.hooksPath .hooks in the script
+    [ -d .git ] && git config core.hooksPath .hooks || true
 ```
 
 We invite you to see the `.hooks/pre-commit` and `pint.json` files for configuring [laravel pint](https://laravel.com/docs/10.x/pint).
