@@ -13,7 +13,7 @@ This optimization helps ensure that your Laravel API operates efficiently in a p
     Model::preventLazyLoading(! $this->app->isProduction());
 ```
 
-### Force 
+### Force Https for all generated url in Production
 
 We force https on with the url generator in `boot()` method of `app/Providers/AppServiceProvider.php`.
 
@@ -36,7 +36,7 @@ We invite you to see the `.hooks/pre-commit` and `pint.json` files for configuri
 ## Installed packages
 Here are the dependencies added after installing laravel 10.x
 
-- [pestphp/pest] (https://pestphp.com/).
+- [pestphp/pest](https://pestphp.com/).
 
 ## License
 
