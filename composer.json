@@ -44,7 +44,7 @@
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
-            "touch storage/database/database.sqlite"
+            "touch database/database.sqlite"
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
