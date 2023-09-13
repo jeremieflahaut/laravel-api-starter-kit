@@ -2,7 +2,7 @@ name: Tests
 
 on:
   pull_request:
-    branches: [ "master" ]
+    branches: [ "main" ]
 
 jobs:
   laravel-tests:
@@ -45,7 +45,7 @@ jobs:
           coverage_badge_path: output/coverage.svg
           push_badge: false
 
-      - name: Git push to image-data branch
+      - name: Git push to badges branch
         uses: peaceiris/actions-gh-pages@v3
         with:
           publish_dir: ./output
