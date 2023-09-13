@@ -2,6 +2,15 @@
 
 ## Features
 
+### Github workflow for laravel test
+
+Laravel tests are run in Github runner . The cover badge will be pushed to a Badges branch. To do this, you must provide read and write access to the workflow.<br>
+
+To do this, go to settings >> Actions >> General >> Workflow permissions in your repository.
+
+[![Tests](https://github.com/jeremieflahaut/laravel-api-starter-kit/actions/workflows/tests.yml/badge.svg)](https://github.com/jeremieflahaut/laravel-api-starter-kit/actions/workflows/tests.yml)
+![Coverage](https://github.com/jeremieflahaut/laravel-api-starter-kit/blob/badges/coverage.svg?raw=true&sanitize=true&branch=badges)
+
 ### Preventing Lazy Loading in development
 In this starter kit, we've included a useful feature to optimize your application's performance when running in a production environment. The line of code `Model::preventLazyLoading(!$this->app->isProduction());` in `boot()` method of `app/Providers/AppServiceProvider.php` is responsible for this behavior.
 Lazy loading is a feature in Laravel that loads related data from the database only when it's actually needed. While this can be convenient during development, it can lead to unnecessary database queries and decreased performance in a production environment.
