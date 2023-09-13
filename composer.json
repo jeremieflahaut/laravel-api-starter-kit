@@ -1,5 +1,5 @@
 {
-    "name": "laravel/laravel",
+    "name": "jeremieflahaut/laravel-api-starter-kit",
     "type": "project",
     "description": "The skeleton application for the Laravel framework.",
     "keywords": ["laravel", "framework"],
