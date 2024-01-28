@@ -38,16 +38,34 @@ To do this, go to settings >> Actions >> General >> Workflow permissions in your
 [![Tests](https://github.com/jeremieflahaut/laravel-api-starter-kit/actions/workflows/tests.yml/badge.svg)](https://github.com/jeremieflahaut/laravel-api-starter-kit/actions/workflows/tests.yml)
 ![Coverage](https://github.com/jeremieflahaut/laravel-api-starter-kit/blob/badges/coverage.svg?raw=true&sanitize=true&branch=badges)
 
-### Preventing Lazy Loading in development
-In this starter kit, we've included a useful feature to optimize your application's performance when running in a production environment. The line of code `Model::preventLazyLoading(!$this->app->isProduction());` in `boot()` method of `app/Providers/AppServiceProvider.php` is responsible for this behavior.
-Lazy loading is a feature in Laravel that loads related data from the database only when it's actually needed. While this can be convenient during development, it can lead to unnecessary database queries and decreased performance in a production environment.
-To address this, we've added a conditional check in our models. When your application is in production mode (as determined by `isProduction()`), lazy loading is disabled by calling `preventLazyLoading(true)` on all Eloquent models. This means that related data will be loaded eagerly, reducing the number of database queries and improving overall performance.
-You can modify or extend this behavior to suit your specific requirements by adjusting the condition or adding more logic to the `preventLazyLoading` call in your models.
-This optimization helps ensure that your Laravel API operates efficiently in a production environment, providing a smoother experience for your users.
+### Enforcing Strict Behavior in Development with shouldBeStrict
 
 ```php
-    Model::preventLazyLoading(! $this->app->isProduction());
+    Model::shouldBeStrict(! $this->app->isProduction());
 ```
+
+```php
+public static function shouldBeStrict(bool $shouldBeStrict = true)
+{
+    static::preventLazyLoading($shouldBeStrict);
+    static::preventSilentlyDiscardingAttributes($shouldBeStrict);
+    static::preventAccessingMissingAttributes($shouldBeStrict);
+}
+```
+
+In our starter kit, we've adopted the shouldBeStrict method to optimize application performance and enforce better coding practices, especially in a production environment. This method, located in the boot() method of app/Providers/AppServiceProvider.php, is defined as follows:
+
+1. preventLazyLoading($shouldBeStrict)
+- Functionality: When set to true, this function throws an exception if lazy loading is attempted on Eloquent models. Lazy loading, while useful in development, can lead to numerous unoptimized database queries in production, impacting performance.
+- Benefit: Encourages the use of eager loading strategies, thus reducing database load and enhancing application efficiency.
+
+2. preventSilentlyDiscardingAttributes($shouldBeStrict)
+- Functionality: This ensures that any attempt to set attributes that do not exist on the model will throw an exception. Normally, Laravel silently discards such assignments, which can mask typos or logic errors.
+- Benefit: Increases code robustness by avoiding silent failures and ensuring data integrity.
+
+3. preventAccessingMissingAttributes($shouldBeStrict)
+- Functionality: When enabled, trying to access undefined or non-existent attributes on a model will result in an exception. By default, Laravel returns null for undefined attributes, which can lead to subtle bugs.
+- Benefit: Enhances code safety by making attribute access more explicit and preventing unnoticed errors due to undefined attributes.
 
 ### Force Https for all generated url in Production
 
